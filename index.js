@@ -60,4 +60,3 @@ function swap(element1,element2){
     document.getElementById(element1).innerHTML=document.getElementById(element2).innerHTML;
     document.getElementById(element2).innerHTML=temp;
 }
-swap(1,2);
