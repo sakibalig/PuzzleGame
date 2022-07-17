@@ -1,7 +1,6 @@
 var movesCount=1;
 function swap(elem1,elem2){
     [document.getElementById(elem1).innerHTML,document.getElementById(elem2).innerHTML]=[document.getElementById(elem2).innerHTML,document.getElementById(elem1).innerHTML];
-    [document.getElementById(elem1).style.background,document.getElementById(elem2).style.background]=[document.getElementById(elem2).style.background,document.getElementById(elem1).style.background];
 }
 if(movesCount==0){
     document.querySelector('#pause-btn').disabled=true;
