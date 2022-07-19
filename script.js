@@ -141,7 +141,6 @@ document.getElementById('pause-btn').onclick=()=>{
     }
 }
 function againAnimation(elem){
-    document.getElementById('dig'+elem).preventDefault;
     document.getElementById('dig'+elem).classList.remove("animation");
     void document.getElementById('dig'+elem).offsetWidth;
     document.getElementById('dig'+elem).classList.add("animation");
