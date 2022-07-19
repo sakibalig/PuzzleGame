@@ -169,6 +169,9 @@ document.getElementById('new-game').onclick=function(){
 }
 document.getElementById('play-again').onclick=function(){
     movesCount=0;
+    for(let i=1;i<10;i++){
+        againAnimation(i);
+    }
     document.getElementById('finish-alert').style.opacity=0;
     document.getElementById('finish-alert').style.zIndex='-1';
     document.getElementById('moves-count').innerHTML=movesCount;
