@@ -117,6 +117,7 @@ function swap(elem1,elem2){
 }
 document.getElementById('pause-btn').onclick=()=>{
     if(movesCount!=0){
+        document.getElementById('pause-btn').style.cursor='default';
         document.getElementById('pause-btn').onclick=function() {
             if(document.getElementById('pause-btn').innerHTML=='Pause'){
                 document.getElementById('pause-icon').style.zIndex="10";
@@ -145,6 +146,9 @@ document.getElementById('pause-btn').onclick=()=>{
                 myTimer = setInterval(myClock, 1000);
             }
         }
+    }
+    else{
+        document.getElementById('pause-btn').style.cursor='not-allowed';
     }
 }
 function againAnimation(elem){
