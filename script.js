@@ -82,7 +82,7 @@ document.getElementById('puzzle-container').onclick=function(){
                 document.getElementById('puzzle-container').style.borderRadius='2em';
                 document.getElementById('puzzle-container').style.opacity=0.45;
                 clearInterval(myTimer);
-                if(document.getElementById('record-count').innerHTML<movesCount){
+                if(document.getElementById('record-count').innerHTML>movesCount){
                     document.getElementById('record-count').innerHTML=movesCount;
                 }
             }
