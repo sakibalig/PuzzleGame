@@ -82,7 +82,7 @@ document.getElementById('puzzle-container').onclick=function(){
                 document.getElementById('puzzle-container').style.borderRadius='2em';
                 document.getElementById('puzzle-container').style.opacity=0.45;
                 clearInterval(myTimer);
-                document.getElementById('pause-btn').disable='true';
+                document.getElementById('pause-btn').disabled=true;
                 if(document.getElementById('record-count').innerHTML==0){
                     document.getElementById('record-count').innerHTML=movesCount;
                 }
@@ -161,7 +161,7 @@ function againAnimation(elem){
     document.getElementById('dig'+elem).classList.add("animation");
 }
 document.getElementById('new-game').onclick=function(){
-    document.getElementById('pause-btn').disable='false';
+    document.getElementById('pause-btn').disabled=false;
     for(let i=1;i<10;i++){
         againAnimation(i);
     }
@@ -185,7 +185,7 @@ document.getElementById('new-game').onclick=function(){
 }
 document.getElementById('play-again').onclick=function(){
     movesCount=0;
-    document.getElementById('pause-btn').disable='false';
+    document.getElementById('pause-btn').disabled=false;
     document.getElementById('puzzle-container').style='none';
     for(let i=1;i<10;i++){
         againAnimation(i);
