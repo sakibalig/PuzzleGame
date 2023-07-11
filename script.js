@@ -1,18 +1,25 @@
 async function AfterLoad(){
     let movesCount=0;
     let time=0;
-    let myTimer;
+    let myTimer,tempTimer=0;
     const timer=document.getElementById('time');
-    // const alert=document.getElementById('finish-alert');
-    // const pause=document.getElementById('pause-icon');
-    // alert.style.opacity=0;
-    // alert.style.zIndex='-1'
-    // pause.style.zIndex="-1";
-    // function animateAgain(){
-    //     alert.classList.remove("animate");
-    //     void alert.offsetWidth;
-    //     alert.classList.add("animate");
-    // }
+    let pause=document.getElementById('pause-btn');
+    let contStyle=document.querySelector('.puzzle-container').style;
+    const alert=document.getElementById('finish-alert');
+    const pauseIcon=document.getElementById('pause-icon');
+    const moves=document.getElementById('moves');
+    const totalMoves=document.getElementById('total-moves');
+    let best=document.getElementById('record-count')
+    const newGame=document.getElementById('new-game');
+    const playAgain=document.getElementById('play-again');
+    alert.style.opacity=0;
+    alert.style.zIndex='-10';
+    pauseIcon.style.zIndex="-10";
+    function animateAgain(){
+        alert.classList.remove("animate");
+        void alert.offsetWidth;
+        alert.classList.add("animate");
+    }
     let dig,digArr,masterBox,arr,movableButton,id,digId;
     const aroundMaster=()=>{
         dig=document.getElementsByClassName('digit');
@@ -83,11 +90,15 @@ async function AfterLoad(){
                     againAnimation([e,parseInt(id)]);
                     swap(e,id);
                     aroundMaster();
+                    pause.style.cursor='pointer';
                     // console.log(movableButton);
                     movesCount++;
-                    if(timer.innerHTML=='0 s'){
+                    if(tempTimer==0){
                         console.log("start");
                         myTimer = setInterval(myClock, 1000);
+                        setTimeout(()=>{
+                            tempTimer++;
+                        },1)
                     }
                     colourSetter();
                     let matchCount=0;
@@ -101,35 +112,44 @@ async function AfterLoad(){
                             break;
                         }
                     }
-                    // if(matchCount==8){
-                    //     document.getElementById('finish-alert').style.opacity=1;
-                    //     document.getElementById('finish-alert').style.zIndex='10';
-                    //     document.getElementById('total-moves').innerHTML=movesCount;
-                    //     animateAgain();
-                    //     document.getElementById('puzzle-container').style.backgroundColor='white';
-                    //     document.getElementById('puzzle-container').style.borderRadius='2em';
-                    //     document.getElementById('puzzle-container').style.opacity=0.45;
-                    //     clearInterval(myTimer);
-                    //     document.getElementById('pause-btn').disabled=true;
-                    //     if(document.getElementById('record-count').innerHTML==0){
-                    //         document.getElementById('record-count').innerHTML=movesCount;
-                    //     }
-                    //     else if(document.getElementById('record-count').innerHTML>movesCount){
-                    //         document.getElementById('record-count').innerHTML=movesCount;
-                    //     }
-                    // }
+                    if(matchCount==8){
+                        alert.style.opacity=1;
+                        alert.style.zIndex='10';
+                        moves.innerHTML=movesCount;
+                        animateAgain(digId);
+                        contStyle.backgroundColor='white';
+                        contStyle.borderRadius='2em';
+                        clearInterval(myTimer);
+                        totalMoves.innerHTML=movesCount;
+                        if(best.innerHTML>movesCount){
+                            best.innerHTML=movesCount;
+                        }
+                    }
                     document.getElementById('moves').innerHTML=movesCount;
                 }
             })
         }
     })
-    let pause=document.getElementById('pause-btn');
-    let contStyle=document.querySelector('.puzzle-container').style;
+    const play=()=>{
+        pauseIcon.style.zIndex="0";
+        pause.innerHTML='Pause';
+        pause.style='none';
+        pause.style.cursor="pointer";
+        contStyle.backgroundColor='transparent';
+        contStyle.borderRadius='none';
+        contStyle.zIndex="10";
+        contStyle.opacity=1;
+        pauseIcon.style.opacity=0;
+    }
+    pauseIcon.onclick=()=>{
+        play();
+        myTimer = setInterval(myClock, 1000);
+    }
     pause.onclick=()=>{
         if(movesCount!=0){
-            pause.style.cursor='default';
             if(pause.innerHTML=='Pause'){
-                // document.getElementById('pause-icon').style.zIndex="0";
+                pauseIcon.style.zIndex="10";
+                pauseIcon.style.opacity=1;
                 pause.innerHTML='Play';
                 pause.style.backgroundColor="white";
                 pause.style.color="black";
@@ -141,75 +161,36 @@ async function AfterLoad(){
                 clearInterval(myTimer);
             }
             else{
-                // document.getElementById('pause-icon').onclick=()=>{
-                //     document.getElementById('pause-icon').style.zIndex="0";
-                //     document.getElementById('pause-btn').innerHTML='Pause';
-                //     document.getElementById('pause-btn').style='none';
-                //     document.getElementById('puzzle-container').style='none';
-                //     document.getElementById('pause-icon').style.opacity=0;
-                //     myTimer = setInterval(myClock, 1000);
-                // }
-                pause.innerHTML='Pause';
-                pause.style='none';
-                contStyle.backgroundColor='transparent';
-                contStyle.borderRadius='none';
-                contStyle.zIndex="1";
-                contStyle.opacity=1;
-                // console.log(contStyle);
-                // document.getElementById('pause-icon').style.opacity=0;
+                play();
                 myTimer = setInterval(myClock, 1000);
+                // console.log(contStyle);
             }
         }
         else{
             pause.style.cursor='not-allowed';
         }
     }
-    document.getElementById('new-game').onclick=function(){
-        document.getElementById('pause-btn').disabled=false;
-        againAnimation(digId);
+    const handleNewGame=()=>{
+        pause.style.cursor="not-allowed";
         time=0;
+        tempTimer=0;
         clearInterval(myTimer);
-        document.getElementById('time-count').innerHTML='0 s';
+        timer.innerHTML='0 s';
         movesCount=0;
-        document.getElementById('moves-count').innerHTML=movesCount;
-        if(document.getElementById('pause-btn').innerHTML=='Play'){
-            document.getElementById('pause-btn').innerHTML='Pause';
-            document.getElementById('pause-btn').style='none';
-            document.getElementById('puzzle-container').style='none';
-            document.getElementById('pause-icon').style.opacity=0;
+        moves.innerHTML=movesCount;
+        if(pause.innerHTML=='Play'){
+            play();
         }
-        for(let i=0;i<3;i++){
-            for(let j=0;j<3;j++){
-                swap(Math.floor(Math.random()*9+1),Math.floor(Math.random()*9+1));
-            }
-        }
+        suffle();
+        aroundMaster();
+        againAnimation(digId);
         colourSetter();
     }
-    document.getElementById('play-again').onclick=function(){
-        movesCount=0;
-        document.getElementById('pause-btn').disabled=false;
-        document.getElementById('puzzle-container').style='none';
-        for(let i=1;i<10;i++){
-            againAnimation(i);
-        }
-        document.getElementById('finish-alert').style.opacity=0;
-        document.getElementById('finish-alert').style.zIndex='-1';
-        document.getElementById('moves-count').innerHTML=movesCount;
-        if(document.getElementById('pause-btn').innerHTML=='Play'){
-            document.getElementById('pause-btn').innerHTML='Pause';
-            document.getElementById('pause-btn').style='none';
-            document.getElementById('puzzle-container').style='none';
-            document.getElementById('pause-icon').style.opacity=0;
-        }
-        time=0;
-        clearInterval(myTimer);
-        document.getElementById('time-count').innerHTML='0 s';
-        for(let i=0;i<3;i++){
-            for(let j=0;j<3;j++){
-                swap(Math.floor(Math.random()*9+1),Math.floor(Math.random()*9+1));
-            }
-        }
-        colourSetter();
+    newGame.onclick=function(){
+        handleNewGame();
+    }
+    playAgain.onclick=function(){
+        handleNewGame();
     }
 }
 window.addEventListener('DOMContentLoaded',AfterLoad);

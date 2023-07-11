@@ -156,32 +156,35 @@ h1:hover {
     gap: 2rem;
     justify-content: space-between;
 }
+.puzzle-box{
+    position: relative;
+    width: 30rem;
+    height: 30rem;
+    overflow-y: hidden;
+}
 .puzzle-container {
+    position: relative;
     display: inline-grid;
     grid-template-columns: repeat(3,1fr);
     grid-template-rows: repeat(3,1fr);
     justify-content: center;
     align-items: center;
-    width: 30rem;
-    height: 30rem;
+    width: 100%;
+    height: 100%;
 }
 
 #pause-icon{
+    cursor: pointer;
     opacity: 0;
-    z-index: 10;
     width:6em;
     position: absolute;
-    top:38em;
-    left:51%;
-    transition: all 0.3s;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    transition: all 0.1s;
 }
-
-#pause-icon:hover{
-    transform: scale(1.05);
-}
-
 #pause-icon:active{
-    transform: scale(0.95);
+    transform:translate(-50%,-50%) scale(0.95);
 }
 
 #pause-btn {
@@ -192,7 +195,6 @@ h1:hover {
     height: 4rem;
     font-size: 2em;
     cursor: not-allowed;
-    /* margin-bottom: 1em; */
 }
 
 .instruction {
@@ -367,25 +369,11 @@ footer p svg:hover{
 .fa-facebook:hover {
     color:#14ffdc;
 }
-
-
-
-/* .number{
-    font-family: "Fredoka one",sans-serif;
-    font-size: 7em;
-    width:150px;
-    height:150px;
-    color:black;
-    border-radius: 0.35em;
-    border: none;
-    float: left;
-    margin: 8px;
-} */
-
 .move{
     background-color:rgb(162, 255, 0);
 }
 .digit{
+    font-family: "Fredoka one";
     display: flex;
     align-items: center;
     justify-content: center;
@@ -407,7 +395,7 @@ footer p svg:hover{
     animation-timing-function: cubic-bezier(0.215,0.61,0.355,1);*/
 }
 
-.fixed:hover{
+.digit:hover{
     border: 1px solid white;
 }
 
@@ -416,17 +404,11 @@ footer p svg:hover{
     animation-timing-function: cubic-bezier(0.215,0.61,0.355,1);
 }
 
-/*
--------------------------------------------------------------------3
-*/
-
 #finish-alert{
+    position: absolute;
+    width: 100%;
+    height: 100%;
     background-color: #7FFFD3;
-    width:350px;
-    height: 200px;
-    position: relative;
-    left:43%;
-    bottom:510px;
     border-radius: 1em;
     font-family: "Fredoka one",sans-serif;
 }
@@ -435,31 +417,26 @@ footer p svg:hover{
     animation:comeUp 0.4s ease-out;
 }
 
-#alert-heading{
+.alert-heading{
     color: black;
-    font-size: 3em;
+    font-size: 3rem;
     text-align: center;
-    position: relative;
-    top:10px;
-    letter-spacing: 2px;
+    letter-spacing: 0.1rem;
 }
 
-#message{
-    font-size: 1.5em;
+.message{
+    font-size: 2rem;
     text-align: center;
-    position: relative;
-    bottom:10px;
 }
 
 #play-again{
-    width:7em;
-    height:2em;
+    width:9rem;
+    height:3rem;
     background-color: black;
     position: relative;
     left:50%;
-    bottom:10px;
     transform:translateX(-50%);
-    font-size: 1.5em;
+    font-size: 2rem;
     transition: all 0.2s;
 }
 

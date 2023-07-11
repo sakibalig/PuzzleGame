@@ -27,11 +27,10 @@
             <span class="stat" id="moves">0</span>
         </div>
         <div class="stats-tile">
-            <span class="stats-title record">Previous Best</span>
+            <span class="stats-title record">Previous Best Moves</span>
             <span class="stat" id="best">0</span>
         </div>
     </div>
-    <span><img src="images/pause-icon-1.png" width="100" id="pause-icon"></span>
     <div class="main-container">
         <div class="puzzle-block">
             <div class="images-left">
@@ -39,33 +38,45 @@
                 <img src="images/num-3.png" class="num1-3-5 left-tilt num3-4" width="110">
                 <img src="images/num-5.png" class="num1-3-5 right-tilt num5-9" width="90">
             </div>
-            <div class="puzzle-container">
-                <div class="move digit" id="1">
-                    1
+            <div class="puzzle-box">
+                <div id="finish-alert" class="animate">
+                    <h2 class="alert-heading">Excellent</h2>
+                    <h3 class="message">
+                        It took you
+                        <b><span id="total-moves" style="color:rgb(19, 56, 170)">0</span></b>
+                        <b>moves</b>
+                    </h3>
+                    <button class="btn" id="play-again">Play Again</button>
                 </div>
-                <div class="move digit" id="2">
-                    2
-                </div>
-                <div class="move digit" id="3">
-                    3
-                </div>
-                <div class="move digit" id="4">
-                    4
-                </div>
-                <div class="move digit" id="5">
-                    5
-                </div>
-                <div class="move digit" id="6">
-                    6
-                </div>
-                <div class="move digit" id="7">
-                    7
-                </div>
-                <div class="move digit" id="8">
-                    8
-                </div>
-                <div class="digit fixed" id="9">
-                        
+                <img src="images/pause-icon-1.png" width="100" id="pause-icon">
+                <div class="puzzle-container">
+                    <div class="move digit" id="1">
+                        1
+                    </div>
+                    <div class="move digit" id="2">
+                        2
+                    </div>
+                    <div class="move digit" id="3">
+                        3
+                    </div>
+                    <div class="move digit" id="4">
+                        4
+                    </div>
+                    <div class="move digit" id="5">
+                        5
+                    </div>
+                    <div class="move digit" id="6">
+                        6
+                    </div>
+                    <div class="move digit" id="7">
+                        7
+                    </div>
+                    <div class="move digit" id="8">
+                        8
+                    </div>
+                    <div class="digit fixed" id="9">
+                            
+                    </div>
                 </div>
             </div>
             <div class="images-right">
@@ -106,15 +117,6 @@
             </div> 
         </footer>
     </div>
-    <!-- <div id="finish-alert" class="animate">
-        <h2 id="alert-heading">Excellent</h2>
-        <h3 id="message">
-            It took you
-            <b><span id="total-moves" style="color:rgb(19, 56, 170)">0</span></b>
-            <b>moves</b>
-        </h3>
-        <button class="btn" id="play-again">Play Again</button>
-    </div> -->
 </body>
 <script src="script.js"></script>
 
