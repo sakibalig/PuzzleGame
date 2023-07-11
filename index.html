@@ -15,100 +15,98 @@
 </head>
 
 <body>
-    <h1 id="heading">Puzzle</h1>
-    <div id="images-left">
-        <img src="images/num-1.png" id="num1" width="70">
-        <img src="images/num-3.png" id="num3" width="110">
-        <img src="images/num-5.png" id="num5" width="90">
-    </div>
-    <div id="images-right">
-        <img src="images/num-2.png" id="num2" width="70">
-        <img src="images/num-4.png" id="num4" width="110">
-        <img src="images/num-9.png" id="num9" width="90">
-    </div>
-    <div id="below-heading-tile">
+    <h1>Puzzle</h1>
+    <div class="below-heading-tile">
         <button id="new-game" class="btn">new game</button>
-        <div id="time">
-            <span id="time-tittle">Time</span>
-            <b><span id="time-count">0 s</span></b>
+        <div class="stats-tile">
+            <span class="stats-title">Time</span>
+            <span class="stat" id="time">0 s</span>
         </div>
-        <div id="moves">
-            <span id="moves-tittle">Moves</span>
-            <span id="moves-count"><b>0</b></span>
+        <div class="stats-tile">
+            <span class="stats-title">Moves</span>
+            <span class="stat" id="moves">0</span>
         </div>
-        <div id="record">
-            <span id="record-tittle">Previous Best</span>
-            <b><span id="record-count">0</span></b>
+        <div class="stats-tile">
+            <span class="stats-title record">Previous Best</span>
+            <span class="stat" id="best">0</span>
         </div>
     </div>
     <span><img src="images/pause-icon-1.png" width="100" id="pause-icon"></span>
-    <div id="puzzle-container">
-        <button id="dig1" class="number animation">
-            <div class="digit" id="1">
-                1
+    <div class="main-container">
+        <div class="puzzle-block">
+            <div class="images-left">
+                <img src="images/num-1.png" class="num1-3-5 right-tilt num1-2" width="70">
+                <img src="images/num-3.png" class="num1-3-5 left-tilt num3-4" width="110">
+                <img src="images/num-5.png" class="num1-3-5 right-tilt num5-9" width="90">
             </div>
-        </button>
-        <button id="dig2" class="number animation">
-            <div class="digit" id="2">
-                2
+            <div class="puzzle-container">
+                <div class="move digit" id="1">
+                    1
+                </div>
+                <div class="move digit" id="2">
+                    2
+                </div>
+                <div class="move digit" id="3">
+                    3
+                </div>
+                <div class="move digit" id="4">
+                    4
+                </div>
+                <div class="move digit" id="5">
+                    5
+                </div>
+                <div class="move digit" id="6">
+                    6
+                </div>
+                <div class="move digit" id="7">
+                    7
+                </div>
+                <div class="move digit" id="8">
+                    8
+                </div>
+                <div class="digit fixed" id="9">
+                        
+                </div>
             </div>
-        </button>
-        <button id="dig3" class="number animation">
-            <div class="digit" id="3">
-                3
+            <div class="images-right">
+                <img src="images/num-2.png" class="num2-4-9 right-tilt num1-2" width="70">
+                <img src="images/num-4.png" class="num2-4-9 left-tilt num3-4" width="110">
+                <img src="images/num-9.png" class="num2-4-9 right-tilt num5-9" width="90">
             </div>
-        </button>
-        <button id="dig4" class="number animation">
-            <div class="digit" id="4">
-                4
+        </div>
+        <button class="btn" id="pause-btn">Pause</button>
+        <div class="instruction">
+            <div class="arrows">
+                <span class="arrow up">&#916</span>
+                <div class="bottom-row">
+                    <span class="arrow left">&#916</span>
+                    <span class="arrow down">&#916</span>
+                    <span class="arrow right">&#916</span>
+                </div>
             </div>
-        </button>
-        <button id="dig5" class="number animation">
-            <div class="digit" id="5">
-                5
-            </div>
-        </button>
-        <button id="dig6" class="number animation">
-            <div class="digit" id="6">
-                6
-            </div>
-        </button>
-        <button id="dig7" class="number animation">
-            <div class="digit" id="7">
-                7
-            </div>
-        </button>
-        <button id="dig8" class="number animation">
-            <div class="digit" id="8">
-                8
-            </div>
-        </button>
-        <button id="dig9" class="number animation">
-            <div class="digit" id="9">
-                
-            </div>
-        </button>
+            <span class="instruction-text">Move tiles in grid to order them</span>
+        </div>
+        <footer>
+            <p>Made with  
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                </svg>
+                by Sarvan
+            </p>
+            <div class="social">
+                <a href="https://github.com/Hurricane0017" target="_blank">
+                    <i class=" social-id fa fa-github" style="font-size:2em"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/sarvan-kumar-singh-622947226" target="_blank">
+                    <i class=" social-id fa fa-linkedin-square" style="font-size:2em"></i>
+                </a>
+                <a href="https://www.facebook.com/sarvankumar.singh.739" target="_blank">
+                    <i class=" social-id fa fa-facebook" style="font-size:2em"></i>
+                </a>
+            </div> 
+        </footer>
     </div>
-    <button class="btn" id="pause-btn">Pause</button>
-    <div id="instruction">
-        <span id="up" class="arrow">&#916</span>
-        <span id="down" class="arrow">&#916</span>
-        <span id="left" class="arrow">&#916</span>
-        <span id="right" class="arrow">&#916</span>
-        <span id="instruction-text">Move tiles in grid<br>to order them</span>
-    </div>
-    <div id="footer">
-        <a href="https://github.com/Hurricane0017" target="_blank">
-            <i class=" social-id fa fa-github" style="font-size:2em"></i>
-        </a>
-        <a href="https://www.linkedin.com/in/sarvan-kumar-singh-622947226" target="_blank">
-            <i class=" social-id fa fa-linkedin-square" style="font-size:2em"></i>
-        </a>
-        <a href="https://www.facebook.com/sarvankumar.singh.739" target="_blank">
-            <i class=" social-id fa fa-facebook" style="font-size:2em"></i>
-        </a>
-    </div>
-    <div id="finish-alert" class="animate">
+    <!-- <div id="finish-alert" class="animate">
         <h2 id="alert-heading">Excellent</h2>
         <h3 id="message">
             It took you
@@ -116,7 +114,7 @@
             <b>moves</b>
         </h3>
         <button class="btn" id="play-again">Play Again</button>
-    </div>
+    </div> -->
 </body>
 <script src="script.js"></script>
 
