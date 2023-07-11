@@ -9,7 +9,7 @@ async function AfterLoad(){
     const pauseIcon=document.getElementById('pause-icon');
     const moves=document.getElementById('moves');
     const totalMoves=document.getElementById('total-moves');
-    let best=document.getElementById('record-count')
+    let best=document.getElementById('best');
     const newGame=document.getElementById('new-game');
     const playAgain=document.getElementById('play-again');
     alert.style.opacity=0;
@@ -77,6 +77,9 @@ async function AfterLoad(){
     aroundMaster();
     againAnimation(digId);
     colourSetter();
+    let havePersonalBest=localStorage.getItem(best)!=null;
+    // console.log(havePersonalBest);
+    best.innerHTML=(havePersonalBest?localStorage.getItem(best):0);
     digId.map((e)=>{
         // console.log(e.id);
         document.getElementById(e).onclick=()=>{
@@ -94,7 +97,7 @@ async function AfterLoad(){
                     // console.log(movableButton);
                     movesCount++;
                     if(tempTimer==0){
-                        console.log("start");
+                        // console.log("start");
                         myTimer = setInterval(myClock, 1000);
                         setTimeout(()=>{
                             tempTimer++;
@@ -121,8 +124,13 @@ async function AfterLoad(){
                         contStyle.borderRadius='2em';
                         clearInterval(myTimer);
                         totalMoves.innerHTML=movesCount;
-                        if(best.innerHTML>movesCount){
+                        if(best.innerHTML==0){
                             best.innerHTML=movesCount;
+                            localStorage.setItem(best, movesCount);
+                        }
+                        else if(best.innerHTML>movesCount){
+                            best.innerHTML=movesCount;
+                            localStorage.setItem(best, movesCount);
                         }
                     }
                     document.getElementById('moves').innerHTML=movesCount;
