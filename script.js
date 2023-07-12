@@ -91,8 +91,10 @@ async function AfterLoad(){
     const handleLeftPress=()=>{
         let i=parseInt(id);
         i=(i%3?i:10);
+        // console.log("l",i);
         // console.log(i+1);
         if(document.getElementById(i+1)!=null){
+            handleAfterStart();
             againAnimation([i,i+1]);
             swap(i,i+1);
             aroundMaster();
@@ -101,8 +103,10 @@ async function AfterLoad(){
     }
     const handleRightPress=()=>{
         let i=parseInt(id);
-        i=((i-1)%3?i:10);
+        i=((i-1)%3?i:11);
+        // console.log("r",i);
         if(document.getElementById(i-1)!=null){
+            handleAfterStart();
             againAnimation([i,i-1]);
             swap(i,i-1);
             aroundMaster();
@@ -110,7 +114,9 @@ async function AfterLoad(){
         }
     }
     const handleDownPress=()=>{
+        // console.log("d",id);
         if(document.getElementById(id-3)!=null){
+            handleAfterStart();
             againAnimation([id,id-3]);
             swap(id,id-3);
             aroundMaster();
@@ -119,7 +125,9 @@ async function AfterLoad(){
     }
     const handleUpPress=()=>{
         let i=parseInt(id);
+        // console.log("u",i);
         if(document.getElementById(i+3)!=null){
+            handleAfterStart();
             againAnimation([i,i+3]);
             swap(i,i+3);
             aroundMaster();
@@ -184,7 +192,6 @@ async function AfterLoad(){
             else{
                 handleDownPress();
             }
-            handleAfterStart();
         }
     }
     window.addEventListener("keydown",handleKeyPress);
