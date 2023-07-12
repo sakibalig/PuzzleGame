@@ -42,6 +42,17 @@ async function AfterLoad(){
             }
         }
     }
+    const applyPauseStyle=()=>{
+        alert.style.opacity=1;
+        alert.style.zIndex='10';
+        moves.innerHTML=movesCount;
+        animateAgain(digId);
+        contStyle.backgroundColor='white';
+        contStyle.borderRadius='2em';
+        contStyle.zIndex="-1";
+        contStyle.opacity=0.45;
+        clearInterval(myTimer);
+    }
     const againAnimation=(elem)=>{
         elem.map(e=>{
             const ele=document.getElementById(e);
@@ -77,6 +88,106 @@ async function AfterLoad(){
     aroundMaster();
     againAnimation(digId);
     colourSetter();
+    const handleLeftPress=()=>{
+        let i=parseInt(id);
+        i=(i%3?i:10);
+        // console.log(i+1);
+        if(document.getElementById(i+1)!=null){
+            againAnimation([i,i+1]);
+            swap(i,i+1);
+            aroundMaster();
+            colourSetter();
+        }
+    }
+    const handleRightPress=()=>{
+        let i=parseInt(id);
+        i=((i-1)%3?i:10);
+        if(document.getElementById(i-1)!=null){
+            againAnimation([i,i-1]);
+            swap(i,i-1);
+            aroundMaster();
+            colourSetter();
+        }
+    }
+    const handleDownPress=()=>{
+        if(document.getElementById(id-3)!=null){
+            againAnimation([id,id-3]);
+            swap(id,id-3);
+            aroundMaster();
+            colourSetter();
+        }
+    }
+    const handleUpPress=()=>{
+        let i=parseInt(id);
+        if(document.getElementById(i+3)!=null){
+            againAnimation([i,i+3]);
+            swap(i,i+3);
+            aroundMaster();
+            colourSetter();
+        }
+    }
+    const handleAfterStart=()=>{
+        pause.style.cursor='pointer';
+        // console.log(movableButton);
+        movesCount++;
+        if(tempTimer==0){
+            // console.log("start");
+            myTimer = setInterval(myClock, 1000);
+            setTimeout(()=>{
+                tempTimer++;
+            },1)
+        }
+        let matchCount=0;
+        for(let j=1;j<9;j++){
+            if(document.getElementById(j).innerHTML==j){
+                matchCount++;
+                continue;
+            }
+            else{
+                matchCount=0;
+                break;
+            }
+        }
+        let finished=0;
+        if(matchCount==8){
+            pause.style.cursor="not-allowed";
+            applyPauseStyle();
+            totalMoves.innerHTML=movesCount;
+            if(best.innerHTML==0){
+                best.innerHTML=movesCount;
+                localStorage.setItem(best, movesCount);
+            }
+            else if(best.innerHTML>movesCount){
+                best.innerHTML=movesCount;
+                localStorage.setItem(best, movesCount);
+            }
+            finished=1;
+        }
+        moves.innerHTML=movesCount;
+        if(finished){
+            movesCount=0;
+        }
+    }
+    const handleKeyPress=(e)=>{
+        let key=e.keyCode;
+        if((pause.innerHTML=="Pause")&&(key==37||key==38||key==39||key==40)){
+            e.preventDefault();
+            if(key==37){
+                handleLeftPress();
+            }
+            else if(key==38){
+                handleUpPress();
+            }
+            else if(key==39){
+                handleRightPress();
+            }
+            else{
+                handleDownPress();
+            }
+            handleAfterStart();
+        }
+    }
+    window.addEventListener("keydown",handleKeyPress);
     let havePersonalBest=localStorage.getItem(best)!=null;
     // console.log(havePersonalBest);
     best.innerHTML=(havePersonalBest?localStorage.getItem(best):0);
@@ -93,47 +204,8 @@ async function AfterLoad(){
                     againAnimation([e,parseInt(id)]);
                     swap(e,id);
                     aroundMaster();
-                    pause.style.cursor='pointer';
-                    // console.log(movableButton);
-                    movesCount++;
-                    if(tempTimer==0){
-                        // console.log("start");
-                        myTimer = setInterval(myClock, 1000);
-                        setTimeout(()=>{
-                            tempTimer++;
-                        },1)
-                    }
                     colourSetter();
-                    let matchCount=0;
-                    for(let j=1;j<9;j++){
-                        if(document.getElementById(j).innerHTML==j){
-                            matchCount++;
-                            continue;
-                        }
-                        else{
-                            matchCount=0;
-                            break;
-                        }
-                    }
-                    if(matchCount==8){
-                        alert.style.opacity=1;
-                        alert.style.zIndex='10';
-                        moves.innerHTML=movesCount;
-                        animateAgain(digId);
-                        contStyle.backgroundColor='white';
-                        contStyle.borderRadius='2em';
-                        clearInterval(myTimer);
-                        totalMoves.innerHTML=movesCount;
-                        if(best.innerHTML==0){
-                            best.innerHTML=movesCount;
-                            localStorage.setItem(best, movesCount);
-                        }
-                        else if(best.innerHTML>movesCount){
-                            best.innerHTML=movesCount;
-                            localStorage.setItem(best, movesCount);
-                        }
-                    }
-                    document.getElementById('moves').innerHTML=movesCount;
+                    handleAfterStart();
                 }
             })
         }
@@ -182,6 +254,12 @@ async function AfterLoad(){
         pause.style.cursor="not-allowed";
         time=0;
         tempTimer=0;
+        contStyle.backgroundColor='transparent';
+        contStyle.borderRadius='none';
+        contStyle.zIndex="10";
+        contStyle.opacity=1;
+        alert.style.opacity=0;
+        alert.style.zIndex='-10';
         clearInterval(myTimer);
         timer.innerHTML='0 s';
         movesCount=0;
@@ -198,6 +276,7 @@ async function AfterLoad(){
         handleNewGame();
     }
     playAgain.onclick=function(){
+        console.log("clicked");
         handleNewGame();
     }
 }
